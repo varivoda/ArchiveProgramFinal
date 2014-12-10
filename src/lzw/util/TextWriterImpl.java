@@ -21,6 +21,6 @@ public class TextWriterImpl implements TextWriter{
         for (String str : outList){
             writer.write(str + "\n");
         }
-
+        writer.close();
     }
 }

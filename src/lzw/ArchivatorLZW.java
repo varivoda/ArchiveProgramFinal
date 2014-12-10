@@ -2,6 +2,7 @@ package lzw;
 
 import lzw.util.TextReaderImpl;
 import lzw.util.TextWriterImpl;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class ArchivatorLZW {
         ArchiveByLZWImpl coder = new ArchiveByLZWImpl();
         List<String> stringFile = textReader.readTextFile(inPath);
         List<String> archivedStringFile = coder.archive(stringFile);
-        String fileName = inPath.substring(inPath.lastIndexOf(File.separator)+1);
+        String fileName = inPath.substring(inPath.lastIndexOf(File.separator) + 1);
         String archiveName = fileName.replace('.', '_');
         TextWriterImpl textWriter = new TextWriterImpl(outPath + archiveName);
         textWriter.writeStringListInFile(archivedStringFile);
@@ -32,12 +33,11 @@ public class ArchivatorLZW {
         TextReaderImpl textReader = new TextReaderImpl();
         List<String> archivedFile = textReader.readTextFile(inPath);
         List<String> stringFile = coder.dearchive(archivedFile);
-        String archiveName = inPath.substring(inPath.lastIndexOf(File.separator)+1);
-        String fileName = archiveName.replace('_','.');
-        TextWriterImpl textWriter = new TextWriterImpl(outPath+fileName);
+        String archiveName = inPath.substring(inPath.lastIndexOf(File.separator) + 1);
+        String fileName = archiveName.replace('_', '.');
+        TextWriterImpl textWriter = new TextWriterImpl(outPath + fileName);
         textWriter.writeStringListInFile(stringFile);
     }
-
 
 
 }
