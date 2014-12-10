@@ -8,12 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Created by Иван on 09.12.2014.
@@ -41,10 +36,11 @@ public class ArchiveFrame extends JFrame {
                     File file = fileopen.getSelectedFile();
                     ArchivatorHuffman archivator = new ArchivatorHuffman();
                     try {
-                        archivator.archiving(file.getPath(), file.getParent() + File.separator);
+                        archivator.archiving(file, file.getParent() + File.separator);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
+                    JOptionPane.showMessageDialog(fileopen, "Done");
 
                 }
             }
@@ -56,16 +52,18 @@ public class ArchiveFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileopen = new JFileChooser();
-                int ret = fileopen.showDialog(null, "archive file");
+                int ret = fileopen.showDialog(null, "deArchive file");
                 if (ret == JFileChooser.APPROVE_OPTION) {
                     File file = fileopen.getSelectedFile();
                     ArchivatorHuffman archivator = new ArchivatorHuffman();
                     try {
-                        archivator.deArchiving(file.getPath(), file.getParent() + File.separator);
+                        archivator.deArchiving(file, file.getParent() + File.separator);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
+                    JOptionPane.showMessageDialog(fileopen, "Done");
                 }
+
             }
         });
         panel.add(Box.createGlue());
