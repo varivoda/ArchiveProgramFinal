@@ -129,6 +129,7 @@ public class DearchiveWindow extends JFrame {
                 try {
                     archivator = new ArchivatorHuffman();
                     archivator.deArchiving(fileName, saveDirectory);
+                    JOptionPane.showMessageDialog(null, "Dearchivating is successful!");
                 } catch (IOException exc) {
                     JOptionPane.showMessageDialog(null, "File isn't existing!");
                 }

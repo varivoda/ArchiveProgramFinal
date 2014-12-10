@@ -129,6 +129,7 @@ public class ArchiveWindow extends JFrame {
                 try {
                     archivator = new ArchivatorHuffman();
                     archivator.archiving(fileName, saveDirectory);
+                    JOptionPane.showMessageDialog(null, "Archivating is successful!");
                 } catch (IOException exc){
                     JOptionPane.showMessageDialog(null, "File isn't existing!");
                 }
