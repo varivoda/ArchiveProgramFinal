@@ -14,6 +14,7 @@ import javax.swing.*;
  * Created by Иван on 09.12.2014.
  */
 public class ArchiveFrame extends JFrame {
+/*
 
     public ArchiveFrame(){
 
@@ -78,5 +79,6 @@ public class ArchiveFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+*/
 
 }
