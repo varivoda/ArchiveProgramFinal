@@ -1,4 +1,5 @@
 import graph_interface.ArchiveFrame;
+import graph_interface.MainWindow;
 import huffman.ArchivatorHuffman;
 import lzw.ArchivatorLZW;
 
@@ -40,12 +41,15 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        MainWindow mainWindow = new MainWindow();
+
+/*        javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame.setDefaultLookAndFeelDecorated(true);
                 JDialog.setDefaultLookAndFeelDecorated(true);
                 new ArchiveFrame();
             }
-        });
+        });*/
+
     }
 }

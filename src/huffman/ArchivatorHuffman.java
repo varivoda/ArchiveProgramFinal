@@ -1,5 +1,7 @@
 package huffman;
 
+import interfaces.Archivator;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,14 +12,15 @@ import java.util.List;
 /**
  * Created by Иван on 09.12.2014.
  */
-public class ArchivatorHuffman {
+public class ArchivatorHuffman implements Archivator{
 
     static final int SIZE_ARRAY = 1048576;
 
     // Архивируем файл с путем inPath в директорию outPath
     // имя архива: fileName_расширение
-    public void archiving(File inFile, String outPath) throws IOException {
+    public void archiving(String inString, String outPath) throws IOException {
 
+        File inFile = new File(inString);
         MyHuffman coder = new MyHuffman();
         FileInputStream fileInputStream = new FileInputStream(inFile);
         String fileName = inFile.getPath().substring(inFile.getPath().lastIndexOf(File.separator) + 1);   // преобразуем имя файла : имя.расширение
@@ -58,8 +61,9 @@ public class ArchivatorHuffman {
     }
 
     //Разархивируем файл с путем inPath в директоию outPath
-    public void deArchiving(File inFile, String outPath) throws IOException {
+    public void deArchiving(String inString, String outPath) throws IOException {
 
+        File inFile = new File(inString);
         MyHuffman coder = new MyHuffman();
         String archiveName = inFile.getName();
         String fileName = archiveName.replace('_','.');

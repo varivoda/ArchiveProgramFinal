@@ -1,5 +1,6 @@
 package lzw;
 
+import interfaces.Archivator;
 import lzw.util.TextReaderImpl;
 import lzw.util.TextWriterImpl;
 import java.io.File;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by Иван on 09.12.2014.
  */
-public class ArchivatorLZW {
+public class ArchivatorLZW implements Archivator {
 
     // Архивируем файл с путем inPath в директорию outPath
     // имя архива: fileName_расширение
