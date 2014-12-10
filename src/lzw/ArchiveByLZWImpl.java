@@ -1,5 +1,7 @@
 package lzw;
 
+        import lzw.util.NotFullTableException;
+
         import java.util.ArrayList;
         import java.util.LinkedList;
         import java.util.List;
@@ -8,7 +10,7 @@ package lzw;
 public class ArchiveByLZWImpl implements ArchiveByLZW {
 
     final private ArrayList<String> INIT_TABLE;
-    final static private char FIRST_SYMBOL = 32;
+    final static private char FIRST_SYMBOL = 0;
     final static private char LAST_SYMBOL = 127;
 
     private ArrayList<String> initUNICODE() {
@@ -57,23 +59,27 @@ public class ArchiveByLZWImpl implements ArchiveByLZW {
         }
     }
 
-    private String ReadStringAndDecode(final String inputString,final ArrayList table) {
+    private String ReadStringAndDecode(final String inputString,final ArrayList table) throws NotFullTableException {
         String outputString = "";
         StringTokenizer tokenizer = new StringTokenizer(inputString);
         int code = Integer.parseInt(tokenizer.nextToken());
-        outputString += table.get(code).toString();
-        while (tokenizer.hasMoreTokens()) {
-            String newSequence = table.get(code).toString(); //??
-            if (tokenizer.hasMoreTokens()) {
-                code = Integer.parseInt(tokenizer.nextToken());
-                newSequence += table.get(code).toString();
-                table.add(newSequence);
-                outputString += table.get(code).toString();
-            } else {
-                outputString += table.get(code).toString();
+        try {
+            outputString += table.get(code).toString();
+            while (tokenizer.hasMoreTokens()) {
+                String newSequence = table.get(code).toString(); //??
+                if (tokenizer.hasMoreTokens()) {
+                    code = Integer.parseInt(tokenizer.nextToken());
+                    newSequence += table.get(code).toString();
+                    table.add(newSequence);
+                    outputString += table.get(code).toString();
+                } else {
+                    outputString += table.get(code).toString();
+                }
             }
+            return outputString;
+        }catch (IndexOutOfBoundsException e){
+            throw new NotFullTableException("Table doesn't contains such element");
         }
-        return outputString;
     }
 
     @Override
@@ -89,13 +95,18 @@ public class ArchiveByLZWImpl implements ArchiveByLZW {
 
     @Override
     public List<String> dearchive(final List<String> encodedStringList) {
-        List<String> decodedOutput = new LinkedList<>();
-        ArrayList<String> table = new ArrayList<>();
-        table.addAll(INIT_TABLE);
-        for (String encodedString : encodedStringList) {
-            decodedOutput.add(ReadStringAndDecode(encodedString, table));
+        try {
+            List<String> decodedOutput = new LinkedList<>();
+            ArrayList<String> table = new ArrayList<>();
+            table.addAll(INIT_TABLE);
+            for (String encodedString : encodedStringList) {
+                decodedOutput.add(ReadStringAndDecode(encodedString, table));
+            }
+            return decodedOutput;
+        } catch (NotFullTableException e) {  // Возможно лучше это исключение пробрость до юзера!
+            e.getMessage();
         }
-        return decodedOutput;
+        return null;
     }
 }
 

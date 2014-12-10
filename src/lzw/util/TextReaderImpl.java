@@ -21,6 +21,7 @@ public class TextReaderImpl implements TextReader {
         while ((line = reader.readLine()) != null) {
             stringArray.add(line);
         }
+        reader.close();
         return stringArray;
     }
 }
